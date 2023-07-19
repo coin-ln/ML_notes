@@ -253,3 +253,47 @@ plt.show()
 输出结果：
 
 ![plot_surface](D:\Github.blog\ML_notes\datas\plot_surface.png)
+
+# 例子
+
+## 多组柱状图
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 创建数据
+categories = ['A', 'B', 'C', 'D', 'E', 'F']  # 柱状图类别
+num_categories = len(categories)  # 类别数量
+num_groups = 6  # 柱状图组数
+group_names = ['Group 1', 'Group 2', 'Group 3', 'Group 4', 'Group 5', 'Group 6']  # 柱状图组名
+bar_width = 0.1  # 柱状图的宽度
+bar_spacing = 0.1  # 柱状图组之间的间距
+
+# 计算每个柱状图组的位置
+index = np.arange(num_categories)
+group_positions = index * (num_groups * (bar_width + bar_spacing))
+
+# 生成随机数据
+np.random.seed(42)
+values = np.random.randint(1, 10, size=(num_categories, num_groups))
+
+# 绘制柱状图
+for i in range(num_groups):
+    plt.bar(group_positions + i * bar_width, values[:, i], bar_width, label=group_names[i])
+
+# 设置刻度标签和轴标签
+plt.xticks(group_positions + (num_groups * bar_width) / 2, categories)
+plt.xlabel('类别')
+plt.ylabel('值')
+plt.title('11种柱状图，每种有6个柱状图')
+
+# 添加图例
+plt.legend()
+
+# 显示图形
+plt.show()
+
+```
+
+![多组柱状图](D:\Github.blog\ML_notes\datas\多组柱状图.png)
